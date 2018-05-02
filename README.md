@@ -2,15 +2,6 @@
 
 Adds System Users and Groups.
 
-Also adds features like:
-- `Process.become(System::User.get("nobody"))`
-- `Process.become(System::Group.get("nobody"))`
-- `Process.user`
-- `Process.group`
-- `System::User.get("root").shell`
-- `System::Group.get("wheel").members`
-- `a_pointer.to_slice_null_terminated(a_limit)` (useful for converting the Char** to an Array(String))
-
 This is a shard containing the contents of crystal-lang/crystal PR [#5627](https://github.com/crystal-lang/crystal/pull/5627)
 
 Note:
@@ -32,11 +23,17 @@ dependencies:
 ## Usage
 
 ```crystal
-require "system/user"
-require "system/group"
+require "user_group"
 ```
 
-TODO: Write usage instructions here
+Adds features like:
+- `Process.become(System::User.get("nobody"))`
+- `Process.become(System::Group.get("nobody"))`
+- `Process.user`
+- `Process.group`
+- `System::User.get("root").shell`
+- `System::Group.get("wheel").members`
+- `a_pointer.to_slice_null_terminated(a_limit)` (useful for converting the Char** to an Array(String))
 
 
 ## Contributing
