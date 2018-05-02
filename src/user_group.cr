@@ -14,3 +14,5 @@
 
 require "./system/user"
 require "./system/group"
+
+require "./process"
