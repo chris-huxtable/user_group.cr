@@ -9,7 +9,6 @@ This is a shard containing the contents of crystal-lang/crystal PR [#5627](https
 
 Note:
  - It will be deleted when a version of Crystal is released containing it. Hopefully v0.25.0.
- - This shard only supports macOS, and OpenBSD. Open an issue or PR if you would like to include another OS.
 
 
 ## Installation
