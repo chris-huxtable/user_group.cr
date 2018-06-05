@@ -25,7 +25,7 @@ struct System::Group
   {% elsif flag?(:linux) %}
     GID_MAX = 0xffffffff_u32
   {% else %}
-    {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux are supported." }}
+    {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux (GNU, musl) are supported." }}
     #GID_MAX = 0xffff_u32 # POSIX Default
   {% end %}
   NGROUPS_MAX = LibC::NGROUPS_MAX
