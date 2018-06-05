@@ -1,4 +1,7 @@
 # user_group.cr
+[![Docs](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://chris-huxtable.github.io/user_group.cr/)
+[![GitHub release](https://img.shields.io/github/release/chris-huxtable/user_group.cr.svg)](https://github.com/chris-huxtable/user_group.cr/releases)
+[![Build Status](https://travis-ci.org/chris-huxtable/user_group.cr.svg?branch=master)](https://travis-ci.org/chris-huxtable/user_group.cr)
 
 Adds System Users and Groups.
 
