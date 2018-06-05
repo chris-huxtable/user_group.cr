@@ -15,7 +15,6 @@
 require "spec"
 require "../src/system/user"
 
-
 private USER_NAME = "root"
 private USER_ID   = 0
 
@@ -23,7 +22,6 @@ private GROUP_GID = 0
 
 private BAD_USER_NAME = "non_existant_user"
 private BAD_USER_ID   = 1234567
-
 
 describe System::User do
   it "username from uid" do

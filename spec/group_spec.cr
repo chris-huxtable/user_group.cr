@@ -16,7 +16,6 @@ require "spec"
 require "../src/system/group"
 require "../src/system/user"
 
-
 {% if flag?(:darwin) || flag?(:openbsd) || flag?(:freebsd) %}
   private GROUP_NAME = "wheel"
   private GROUP_ID = 0
@@ -36,7 +35,6 @@ require "../src/system/user"
 
 private BAD_GROUP_NAME = "non_existant_group"
 private BAD_GROUP_ID   = 123456
-
 
 describe System::Group do
   it "groupname from gid" do

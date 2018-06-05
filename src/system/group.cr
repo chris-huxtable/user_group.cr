@@ -19,7 +19,6 @@ require "../lib_c/unistd"
 require "./user"
 require "../slice"
 
-
 struct System::Group
   {% if flag?(:darwin) || flag?(:openbsd) || flag?(:freebsd) %}
     GID_MAX = LibC::GID_MAX

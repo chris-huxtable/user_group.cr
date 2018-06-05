@@ -15,7 +15,6 @@
 require "./system/user"
 require "./system/group"
 
-
 class Process
   # Sets the real, effective, and saved `User` to the one specified.
   def self.become(user : System::User) : Nil

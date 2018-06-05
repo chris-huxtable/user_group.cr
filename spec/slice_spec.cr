@@ -15,7 +15,6 @@
 require "spec"
 require "../src/slice"
 
-
 describe "Slice" do
   it "does accept null terminated pointer" do
     slice_0 = "abc".to_slice

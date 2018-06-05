@@ -18,7 +18,6 @@ require "../lib_c/unistd"
 
 require "./group"
 
-
 struct System::User
   {% if flag?(:darwin) || flag?(:openbsd) || flag?(:freebsd) %}
     UID_MAX = LibC::UID_MAX

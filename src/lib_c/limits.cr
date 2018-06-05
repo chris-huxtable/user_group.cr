@@ -12,7 +12,6 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-
 {% if flag?(:freebsd) %}
   lib LibC
     UID_MAX     = 0xffffffff_u32 # max value for a uid_t

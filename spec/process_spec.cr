@@ -15,7 +15,6 @@
 require "spec"
 require "../src/process"
 
-
 describe Process do
   describe "users and groups" do
     it "has a user" do
