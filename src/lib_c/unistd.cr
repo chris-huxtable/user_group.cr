@@ -13,7 +13,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
-{% if flag?(:openbsd) %}
+{% if flag?(:openbsd) || flag?(:linux) || flag?(:freebsd) %}
   lib LibC
     fun getuid : UidT
     fun geteuid : UidT

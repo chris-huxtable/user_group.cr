@@ -25,7 +25,7 @@ require "../src/system/user"
   private GROUP_NAME = "root"
   private GROUP_ID = 0
 {% else %}
-  {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux are supported." }}
+  {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux (GNU, musl) are supported." }}
 {% end %}
 
 {% if flag?(:darwin) %}

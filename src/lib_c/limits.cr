@@ -13,7 +13,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
-{% if flag?(:openbsd) %}
+{% if flag?(:freebsd) %}
   lib LibC
     UID_MAX     = 0xffffffff_u32 # max value for a uid_t
     GID_MAX     = 0xffffffff_u32 # max value for a gid_t
@@ -25,6 +25,20 @@
     GID_MAX     = 2147483647_u32 # max value for a gid_t (2^31-2)
     NGROUPS_MAX =             16 # max supplemental group id's
   end
+{% elsif flag?(:freebsd) %}
+  lib LibC
+    UID_MAX     = 0xffffffff_u32 # max value for a uid_t
+    GID_MAX     = 0xffffffff_u32 # max value for a gid_t
+    NGROUPS_MAX =           1023 # max supplemental group id's
+  end
+{% elsif flag?(:gnu) %}
+  lib LibC
+    NGROUPS_MAX =          65536 # max supplemental group id's
+  end
+{% elsif flag?(:musl) %}
+  lib LibC
+    NGROUPS_MAX =             32 # max supplemental group id's
+  end
 {% else %}
-  {{ raise "Unsupported platform, only Darwin, and OpenBSD are supported." }}
+  {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux (GNU, musl) are supported." }}
 {% end %}

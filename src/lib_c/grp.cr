@@ -13,7 +13,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
-{% if flag?(:openbsd) || flag?(:darwin) %}
+{% if flag?(:openbsd) || flag?(:darwin) || flag?(:freebsd) || flag?(:gnu) || flag?(:musl) %}
   lib LibC
     struct Group
       gr_name : Char*   # group name
@@ -26,5 +26,5 @@
     fun getgrgid(uid : UidT) : Group*
   end
 {% else %}
-  {{ raise "Unsupported platform, only Darwin, and OpenBSD are supported." }}
+  {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux (GNU, musl) are supported." }}
 {% end %}
