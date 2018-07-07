@@ -17,21 +17,21 @@ require "./system/group"
 
 class Process
   # Sets the real, effective, and saved `User` to the one specified.
-  def self.become(user : System::User) : Nil
+  def self.user=(user : System::User) : Nil
     return if LibC.setuid(user.uid) == 0
     raise Errno.new("The calling process was not privileged")
   end
 
   # Sets the real, effective, and saved `Group` to the one specified.
-  def self.become(group : System::Group) : Nil
+  def self.group=(group : System::Group) : Nil
     return if LibC.setgid(group.gid) == 0
     raise Errno.new("The calling process was not privileged")
   end
 
   # Sets the real, effective, and saved `User` and `Group` to the ones specified.
   def self.become(user : System::User, group : System::Group) : Nil
-    become(group)
-    become(user)
+    self.group = group
+    self.user = user
   end
 
   # Returns a `Bool` indicating if the current process is running as root.

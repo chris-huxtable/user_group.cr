@@ -51,5 +51,64 @@ describe Process do
         group.should be_a(System::Group)
       end
     {% end %}
+
+    it "setting user raises when unprivileged" do
+      reader, writer = IO.pipe
+      proc = Process.fork {
+        begin
+          Process.user = System::User.get(USER_NAME)
+        rescue ex : Errno
+          writer << "Raises\n"
+          writer.close
+          next
+        end
+
+        writer << "Failed\n"
+        writer.close
+      }
+
+      proc.wait
+      reader.gets.should eq("Raises")
+    end
+
+    it "setting group raises when unprivileged" do
+      reader, writer = IO.pipe
+      proc = Process.fork {
+        begin
+          Process.group = System::Group.get(GROUP_NAME)
+          Process.group = System::Group.get(0)
+        rescue ex : Errno
+          writer << "Raises\n"
+          writer.close
+          next
+        end
+
+        writer << "Failed\n"
+        writer.close
+      }
+
+      proc.wait
+      reader.gets.should eq("Raises")
+    end
+
+    it "setting user and group raises when unprivileged" do
+      reader, writer = IO.pipe
+      proc = Process.fork {
+        begin
+          Process.become(System::User.get(USER_NAME), System::Group.get(GROUP_NAME))
+          Process.become(System::User.get(0), System::Group.get(0))
+        rescue ex : Errno
+          writer << "Raises\n"
+          writer.close
+          next
+        end
+
+        writer << "Failed\n"
+        writer.close
+      }
+
+      proc.wait
+      reader.gets.should eq("Raises")
+    end
   end
 end
