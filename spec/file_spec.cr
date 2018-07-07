@@ -14,9 +14,7 @@
 
 require "./spec_helper"
 
-
 describe File do
-
   it "chown" do
     # changing owners requires special privileges, so we test that method calls do compile
     typeof(File.chown("/tmp/test", owner: 1001))
@@ -49,5 +47,4 @@ describe File do
     typeof(File.chown("/tmp/test"))
     typeof(File.chown("/tmp/test", uid: 1001, gid: 100, follow_symlinks: true))
   end
-
 end

@@ -18,9 +18,8 @@ require "./system/group"
 require "./crystal/system/file"
 
 class File
-
-  private alias User = System::User|String|Int32|UInt32
-  private alias Group = System::Group|String|Int32|UInt32
+  private alias User = System::User | String | Int32 | UInt32
+  private alias Group = System::Group | String | Int32 | UInt32
 
   # Changes the owner of the specified file.
   #
@@ -55,22 +54,22 @@ class File
   end
 
   # :nodoc:
-  private def self.uid_from_user(user : User?) : Int32|UInt32
+  private def self.uid_from_user(user : User?) : Int32 | UInt32
     case user
-      when System::User then user.uid
-      when String       then System::User.uid(user)
-      when Int          then user
-      else                   -1
+    when System::User then user.uid
+    when String       then System::User.uid(user)
+    when Int          then user
+    else                   -1
     end
   end
 
   # :nodoc:
-  private def self.gid_from_group(group : Group?) : Int32|UInt32
+  private def self.gid_from_group(group : Group?) : Int32 | UInt32
     case group
-        when System::Group then group.gid
-        when String        then System::Group.gid(group)
-        when Int           then group
-        else                    -1
-      end
+    when System::Group then group.gid
+    when String        then System::Group.gid(group)
+    when Int           then group
+    else                    -1
+    end
   end
 end

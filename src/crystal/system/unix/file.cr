@@ -12,9 +12,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-
 module Crystal::System::File
-
   def self.chown(path : String, uid : Int, gid : Int, follow_symlinks : Bool)
     return if chown?(path, uid, gid, follow_symlinks)
     raise Errno.new("Error changing owner/group of #{path.inspect}")
@@ -26,7 +24,6 @@ module Crystal::System::File
           else
             LibC.chown(path, uid, gid)
           end
-    return ( ret == 0 )
+    return (ret == 0)
   end
-
 end

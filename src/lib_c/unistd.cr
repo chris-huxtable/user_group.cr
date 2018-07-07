@@ -12,9 +12,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-
 lib LibC
-
   {% if flag?(:openbsd) %}
     SC_GETGR_R_SIZE_MAX = 100
     SC_GETPW_R_SIZE_MAX = 101
@@ -41,5 +39,4 @@ lib LibC
   {% elsif !flag?(:darwin) %}
     {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux (GNU, musl) are supported." }}
   {% end %}
-
 end
