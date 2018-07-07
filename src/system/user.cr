@@ -68,9 +68,22 @@ struct System::User
   # Returns `nil` if not found.
   def self.get?(uid : Int) : User?
     check_uid_in_bounds(uid)
-    user_struct = LibC.getpwuid(uid)
-    return nil if !user_struct
-    new(user_struct.value)
+
+    buf_size = LibC.sysconf(LibC::SC_GETPW_R_SIZE_MAX)
+    buf_size = 16384 if buf_size < 0
+
+    pw_store = Pointer(LibC::Passwd).malloc(1)
+    buf = Pointer(UInt8).malloc(buf_size)
+    result = pointerof(pw_store)
+
+    success = LibC.getpwuid_r(uid, pw_store, buf, buf_size, result)
+
+    if result.value.null?
+      return nil if success == 0
+      raise "getpwuid_r failed"
+    end
+
+    new(pw_store.value)
   end
 
   # Returns the user specified by the user name.
@@ -83,9 +96,22 @@ struct System::User
   # Returns `nil` if not found.
   def self.get?(username : String) : User?
     username.check_no_null_byte
-    user_struct = LibC.getpwnam(username)
-    return nil if !user_struct
-    new(user_struct.value)
+
+    buf_size = LibC.sysconf(LibC::SC_GETPW_R_SIZE_MAX)
+    buf_size = 16384 if buf_size < 0
+
+    pw_store = Pointer(LibC::Passwd).malloc(1)
+    buf = Pointer(UInt8).malloc(buf_size)
+    result = pointerof(pw_store)
+
+    success = LibC.getpwnam_r(username, pw_store, buf, buf_size, result)
+
+    if result.value.null?
+      return nil if success == 0
+      raise "getpwnam_r failed"
+    end
+
+    new(pw_store.value)
   end
 
   # :nodoc:

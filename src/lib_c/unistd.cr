@@ -12,26 +12,34 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-{% if flag?(:openbsd) || flag?(:linux) || flag?(:freebsd) %}
-  lib LibC
-    fun getuid : UidT
-    fun geteuid : UidT
+
+lib LibC
+
+  {% if flag?(:openbsd) %}
+    SC_GETGR_R_SIZE_MAX = 100
+    SC_GETPW_R_SIZE_MAX = 101
+  {% elsif flag?(:darwin) || flag?(:freebsd) %}
+    SC_GETGR_R_SIZE_MAX = 70
+    SC_GETPW_R_SIZE_MAX = 71
+  {% elsif flag?(:musl) || flag?(:gnu) %}
+    SC_GETGR_R_SIZE_MAX = 69
+    SC_GETPW_R_SIZE_MAX = 70
+  {% else %}
+    {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux (GNU, musl) are supported." }}
+  {% end %}
+
+  fun getuid : UidT
+  fun geteuid : UidT
+  fun setuid(uid : UidT) : Int
+  fun getgid : GidT
+  fun getegid : GidT
+  fun setgid(gid : GidT) : Int
+
+  {% if flag?(:openbsd) || flag?(:linux) || flag?(:freebsd) %}
     fun getresuid(ruid : UidT*, euid : UidT*, suid : UidT*) : Int
-    fun setuid(uid : UidT) : Int
-    fun getgid : GidT
-    fun getegid : GidT
     fun getresgid(rgid : GidT*, egid : GidT*, sgid : GidT*) : Int
-    fun setgid(gid : GidT) : Int
-  end
-{% elsif flag?(:darwin) %}
-  lib LibC
-    fun getuid : UidT
-    fun geteuid : UidT
-    fun setuid(uid : UidT) : Int
-    fun getgid : GidT
-    fun getegid : GidT
-    fun setgid(gid : GidT) : Int
-  end
-{% else %}
-  {{ raise "Unsupported platform, only Darwin, and OpenBSD are supported." }}
-{% end %}
+  {% elsif !flag?(:darwin) %}
+    {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux (GNU, musl) are supported." }}
+  {% end %}
+
+end

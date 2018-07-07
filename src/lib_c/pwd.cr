@@ -29,6 +29,9 @@
 
     fun getpwnam(login : Char*) : Passwd*
     fun getpwuid(uid : UidT) : Passwd*
+
+    fun getpwnam_r(login : Char*, pwstore : Passwd*, buf : Char*, bufsize : SizeT, result : Passwd**) : Int
+    fun getpwuid_r(uid : UidT, pwstore : Passwd*, buf : Char*, bufsize : SizeT, result : Passwd**) : Int
   end
 {% elsif flag?(:darwin) || flag?(:freebsd) %}
   lib LibC
@@ -48,6 +51,9 @@
 
     fun getpwnam(login : Char*) : Passwd*
     fun getpwuid(uid : UidT) : Passwd*
+
+    fun getpwnam_r(login : Char*, pwstore : Passwd*, buf : Char*, bufsize : SizeT, result : Passwd**) : Int
+    fun getpwuid_r(uid : UidT, pwstore : Passwd*, buf : Char*, bufsize : SizeT, result : Passwd**) : Int
   end
 {% elsif flag?(:linux) %}
   lib LibC
@@ -63,6 +69,9 @@
 
     fun getpwnam(login : Char*) : Passwd*
     fun getpwuid(uid : UidT) : Passwd*
+
+    fun getpwnam_r(login : Char*, pwstore : Passwd*, buf : Char*, bufsize : SizeT, result : Passwd**) : Int
+    fun getpwuid_r(uid : UidT, pwstore : Passwd*, buf : Char*, bufsize : SizeT, result : Passwd**) : Int
   end
 {% else %}
   {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux (GNU, musl) are supported." }}
