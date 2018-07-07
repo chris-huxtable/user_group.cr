@@ -28,15 +28,15 @@ describe File do
     typeof(File.chown?("/tmp/test", owner: 1001, group: 100, follow_symlinks: true))
 
     typeof(File.chown("/tmp/test", owner: "root"))
-    typeof(File.chown("/tmp/test", group: "wheel"))
-    typeof(File.chown("/tmp/test", owner: "root", group: "wheel", follow_symlinks: true))
+    typeof(File.chown("/tmp/test", group: "daemon"))
+    typeof(File.chown("/tmp/test", owner: "root", group: "daemon", follow_symlinks: true))
 
     typeof(File.chown?("/tmp/test", owner: "root"))
-    typeof(File.chown?("/tmp/test", group: "wheel"))
-    typeof(File.chown?("/tmp/test", owner: "root", group: "wheel", follow_symlinks: true))
+    typeof(File.chown?("/tmp/test", group: "daemon"))
+    typeof(File.chown?("/tmp/test", owner: "root", group: "daemon", follow_symlinks: true))
 
     user = System::User.get("root")
-    group = System::Group.get("wheel")
+    group = System::Group.get("daemon")
 
     typeof(File.chown("/tmp/test", owner: user))
     typeof(File.chown("/tmp/test", group: group))
