@@ -45,6 +45,9 @@ describe File do
     typeof(File.chown?("/tmp/test", owner: user))
     typeof(File.chown?("/tmp/test", group: group))
     typeof(File.chown?("/tmp/test", owner: user, group: group, follow_symlinks: true))
+
+    typeof(File.chown("/tmp/test"))
+    typeof(File.chown("/tmp/test", uid: 1001, gid: 100, follow_symlinks: true))
   end
 
 end

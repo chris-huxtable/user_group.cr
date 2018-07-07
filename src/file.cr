@@ -43,6 +43,11 @@ class File
     Crystal::System::File.chown(path, uid_from_user(owner), gid_from_group(group), follow_symlinks)
   end
 
+  # :nodoc:
+  def self.chown(path : String, uid : Int = -1, gid : Int = -1, follow_symlinks : Bool = false) : Nil
+    Crystal::System::File.chown(path, uid, gid, follow_symlinks)
+  end
+
   # Same as `chown()` but instead returns a `Bool` indicating success.
   # ```
   def self.chown?(path : String, owner : User? = nil, group : Group? = nil, follow_symlinks : Bool = false) : Bool
