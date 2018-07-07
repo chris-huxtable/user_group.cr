@@ -14,13 +14,9 @@
 
 require "./spec_helper"
 
-{% if flag?(:darwin) || flag?(:openbsd) || flag?(:freebsd) %}
-  private GROUP_NAME = "wheel"
-  private GROUP_ID = 0
-{% elsif flag?(:linux) %}
-  # http://refspecs.linux-foundation.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/usernames.html#
-  private GROUP_NAME = "root"
-  private GROUP_ID = 0
+{% if flag?(:darwin) || flag?(:openbsd) || flag?(:freebsd) || flag?(:linux) %}
+  private GROUP_NAME = "daemon"
+  private GROUP_ID = 1
 {% else %}
   {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux (GNU, musl) are supported." }}
 {% end %}
