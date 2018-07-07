@@ -12,8 +12,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-require "spec"
-require "../src/system/user"
+require "./spec_helper"
 
 private USER_NAME = "root"
 private USER_ID   = 0

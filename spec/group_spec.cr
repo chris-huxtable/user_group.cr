@@ -12,9 +12,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-require "spec"
-require "../src/system/group"
-require "../src/system/user"
+require "./spec_helper"
 
 {% if flag?(:darwin) || flag?(:openbsd) || flag?(:freebsd) %}
   private GROUP_NAME = "wheel"

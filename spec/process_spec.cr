@@ -12,8 +12,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-require "spec"
-require "../src/process"
+require "./spec_helper"
 
 describe Process do
   describe "users and groups" do

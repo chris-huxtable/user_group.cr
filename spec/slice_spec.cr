@@ -12,8 +12,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-require "spec"
-require "../src/slice"
+require "./spec_helper"
 
 describe "Slice" do
   it "does accept null terminated pointer" do
