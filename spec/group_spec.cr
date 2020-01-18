@@ -16,7 +16,7 @@ require "./spec_helper"
 
 {% if flag?(:darwin) || flag?(:openbsd) || flag?(:freebsd) || flag?(:linux) %}
   private GROUP_NAME = "daemon"
-  private GROUP_ID = 1
+  private GROUP_ID   = 1
 {% else %}
   {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux (GNU, musl) are supported." }}
 {% end %}

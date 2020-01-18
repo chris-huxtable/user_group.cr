@@ -32,11 +32,11 @@
   end
 {% elsif flag?(:gnu) %}
   lib LibC
-    NGROUPS_MAX =          65536 # max supplemental group id's
+    NGROUPS_MAX = 65536 # max supplemental group id's
   end
 {% elsif flag?(:musl) %}
   lib LibC
-    NGROUPS_MAX =             32 # max supplemental group id's
+    NGROUPS_MAX = 32 # max supplemental group id's
   end
 {% else %}
   {{ raise "Unsupported platform, only Darwin, OpenBSD, FreeBSD, and Linux (GNU, musl) are supported." }}
