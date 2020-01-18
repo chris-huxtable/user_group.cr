@@ -5,11 +5,6 @@
 
 Adds System Users and Groups.
 
-This is a shard containing the contents of crystal-lang/crystal PR [#5627](https://github.com/crystal-lang/crystal/pull/5627)
-
-Note:
- - It will be deleted when a version of Crystal is released containing it. Hopefully v0.25.0.
-
 
 ## Installation
 
