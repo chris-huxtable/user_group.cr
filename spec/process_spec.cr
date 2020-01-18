@@ -14,6 +14,9 @@
 
 require "./spec_helper"
 
+private USER_NAME = "root"
+private GROUP_NAME = "daemon"
+
 describe Process do
   describe "users and groups" do
     it "has a user" do
