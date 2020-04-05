@@ -30,7 +30,7 @@ class Process
   def self.group=(group : System::Group) : Nil
     self.gid = group.gid
   end
-  
+
   def self.gid=(gid : UInt32) : Nil
     return if LibC.setgid(gid) == 0
     raise Errno.new("The calling process was not privileged")
