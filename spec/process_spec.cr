@@ -60,7 +60,7 @@ describe Process do
       proc = Process.fork {
         begin
           Process.user = System::User.get(USER_NAME)
-        rescue ex : Errno
+        rescue ex : RuntimeError
           writer << "Raises\n"
           writer.close
           next
@@ -80,7 +80,7 @@ describe Process do
         begin
           Process.group = System::Group.get(GROUP_NAME)
           Process.group = System::Group.get(0)
-        rescue ex : Errno
+        rescue ex : RuntimeError
           writer << "Raises\n"
           writer.close
           next
@@ -100,7 +100,7 @@ describe Process do
         begin
           Process.become(System::User.get(USER_NAME), System::Group.get(GROUP_NAME))
           Process.become(System::User.get(0), System::Group.get(0))
-        rescue ex : Errno
+        rescue ex : RuntimeError
           writer << "Raises\n"
           writer.close
           next

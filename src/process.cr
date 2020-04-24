@@ -23,7 +23,7 @@ class Process
 
   def self.uid=(uid : UInt32) : Nil
     return if LibC.setuid(uid) == 0
-    raise Errno.new("The calling process was not privileged")
+    raise RuntimeError.from_errno("setuid")
   end
 
   # Sets the real, effective, and saved `Group` to the one specified.
@@ -33,7 +33,7 @@ class Process
 
   def self.gid=(gid : UInt32) : Nil
     return if LibC.setgid(gid) == 0
-    raise Errno.new("The calling process was not privileged")
+    raise RuntimeError.from_errno("setgid")
   end
 
   # Sets the real, effective, and saved `User` and `Group` to the ones specified.
@@ -81,7 +81,7 @@ class Process
         return System::User.get(suid)
       end
 
-      raise Errno.new("Failed to get saved user")
+      raise RuntimeError.from_errno("Failed to get saved user")
     {% else %}
       raise NotImplementedError.new("Process.saved_user")
     {% end %}
@@ -96,7 +96,7 @@ class Process
         return System::Group.get(sgid)
       end
 
-      raise Errno.new("Failed to get saved group")
+      raise RuntimeError.from_errno("Failed to get saved group")
     {% else %}
       raise NotImplementedError.new("Process.saved_group")
     {% end %}

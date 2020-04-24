@@ -13,17 +13,10 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 module Crystal::System::File
-  def self.chown(path : String, uid : Int, gid : Int, follow_symlinks : Bool)
-    return if chown?(path, uid, gid, follow_symlinks)
-    raise Errno.new("Error changing owner/group of #{path.inspect}")
-  end
-
-  def self.chown?(path : String, uid : Int, gid : Int, follow_symlinks : Bool) : Bool
-    ret = if !follow_symlinks && ::File.symlink?(path)
-            LibC.lchown(path, uid, gid)
-          else
-            LibC.chown(path, uid, gid)
-          end
-    return (ret == 0)
-  end
+  {% unless Process.has_method?(:chown) %}
+    def self.chown(path : String, uid : Int, gid : Int, follow_symlinks : Bool)
+      return if chown(path, uid, gid, follow_symlinks)
+      raise RuntimeError.from_errno("Error changing owner/group of #{path.inspect}")
+    end
+  {% end %}
 end
