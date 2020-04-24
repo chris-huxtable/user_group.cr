@@ -50,7 +50,10 @@ class File
   # Same as `chown()` but instead returns a `Bool` indicating success.
   # ```
   def self.chown?(path : String, owner : User? = nil, group : Group? = nil, follow_symlinks : Bool = false) : Bool
-    Crystal::System::File.chown?(path, uid_from_user(owner), gid_from_group(group), follow_symlinks)
+    Crystal::System::File.chown(path, uid_from_user(owner), gid_from_group(group), follow_symlinks)
+    true
+  rescue ex
+    false
   end
 
   # :nodoc:
